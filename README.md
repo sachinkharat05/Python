@@ -1,4 +1,4 @@
-# Python OOP & DSA Practice Repository
+# Python OOP & DSA Practice Repository.
 
 ## 📖 Overview
 This repository contains multiple Python programs created to practice **Object-Oriented Programming (OOP)** concepts, **Data Structures**, and **real-world problem modeling**.  
