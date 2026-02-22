@@ -175,5 +175,4 @@ Marks the directory as a **Python package**.
 
 🔹 **Purpose:**
 - Enables module imports
-- Improves project structure
->>>>>>> 6b4b73e18151504966f34489b0245ab870da181e
+- Improves project structure.
