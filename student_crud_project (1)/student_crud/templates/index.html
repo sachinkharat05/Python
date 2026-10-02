@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block title %}Student Directory | Student Management{% endblock %}
+{% block content %}
+<div class="page-heading">
+  <div>
+    <p class="eyebrow">CAMPUS / RECORDS</p>
+    <h1>Student directory</h1>
+  </div>
+  <a href="{{ url_for('add') }}" class="primary-button"><span aria-hidden="true">+</span> Add student</a>
+</div>
+
+<section class="directory-toolbar" aria-label="Student directory controls">
+  <form class="search-form" method="get" role="search">
+    <label class="visually-hidden" for="student-search">Search students</label>
+    <input id="student-search" type="search" name="q" value="{{ q }}" placeholder="Search by name, email, or course">
+    <button class="search-button" type="submit">Search</button>
+    {% if q %}<a href="{{ url_for('index') }}" class="clear-search">Clear</a>{% endif %}
+  </form>
+  <p class="record-count"><strong>{{ students|length }}</strong> {{ 'match' if students|length == 1 else 'matches' }}</p>
+</section>
+
+<section class="directory-panel" aria-label="Student records">
+  <div class="table-responsive">
+    <table class="directory-table">
+      <thead>
+        <tr><th scope="col">ID</th><th scope="col">Student</th><th scope="col">Email</th><th scope="col">Phone</th><th scope="col">Course</th><th scope="col"><span class="visually-hidden">Actions</span></th></tr>
+      </thead>
+      <tbody>
+        {% for s in students %}
+        <tr>
+          <td class="id-cell">{{ s.id }}</td>
+          <td>
+            <div class="student-name-cell">
+              <span class="student-avatar" aria-hidden="true">{{ s.name[0]|upper }}</span>
+              <span class="student-name">{{ s.name }}</span>
+            </div>
+          </td>
+          <td><a class="table-link" href="mailto:{{ s.email }}">{{ s.email }}</a></td>
+          <td class="muted-cell">{{ s.phone or 'Not provided' }}</td>
+          <td><span class="course-tag">{{ s.course }}</span></td>
+          <td class="actions-cell">
+            <a href="{{ url_for('edit', student_id=s.id) }}" class="action-link edit-link">Edit</a>
+            <form action="{{ url_for('delete', student_id=s.id) }}" method="post" class="delete-form"
+              onsubmit="return confirm('Are you sure you want to delete this student?');">
+              <button class="action-link delete-link" type="submit">Delete</button>
+            </form>
+          </td>
+        </tr>
+        {% else %}
+        <tr>
+          <td colspan="6">
+            <div class="empty-state">
+              <span class="empty-mark" aria-hidden="true">0</span>
+              <h2>{{ 'No matching students' if q else 'No students yet' }}</h2>
+              <p>{{ 'Try another search term.' if q else 'Your directory is ready for its first record.' }}</p>
+              {% if q %}
+              <a class="text-link" href="{{ url_for('index') }}">Clear search</a>
+              {% else %}
+              <a class="text-link" href="{{ url_for('add') }}">Add the first student</a>
+              {% endif %}
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}

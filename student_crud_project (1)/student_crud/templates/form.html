@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}{{ title }} | Student Management{% endblock %}
+{% block content %}
+<div class="form-page">
+  <a class="back-link" href="{{ url_for('index') }}"><span aria-hidden="true">←</span> Back to directory</a>
+  <div class="form-heading">
+    <p class="eyebrow">STUDENT / DETAILS</p>
+    <h1>{{ title }}</h1>
+  </div>
+
+  <section class="form-panel" aria-label="Student details">
+    <form method="post">
+      <div class="form-grid">
+        <div class="field-group">
+          <label for="student-name">Name <span class="required-mark">Required</span></label>
+          <input id="student-name" type="text" name="name" value="{{ student['name'] or '' }}" autocomplete="name" required>
+        </div>
+        <div class="field-group">
+          <label for="student-email">Email <span class="required-mark">Required</span></label>
+          <input id="student-email" type="email" name="email" value="{{ student['email'] or '' }}" autocomplete="email" required>
+        </div>
+        <div class="field-group">
+          <label for="student-phone">Phone <span class="optional-mark">Optional</span></label>
+          <input id="student-phone" type="tel" name="phone" value="{{ student['phone'] or '' }}" autocomplete="tel">
+        </div>
+        <div class="field-group">
+          <label for="student-course">Course <span class="required-mark">Required</span></label>
+          <input id="student-course" type="text" name="course" value="{{ student['course'] or '' }}" required>
+        </div>
+      </div>
+      <div class="form-actions">
+        <a href="{{ url_for('index') }}" class="secondary-button">Cancel</a>
+        <button type="submit" class="primary-button">{{ 'Add student' if title == 'Add Student' else 'Save changes' }}</button>
+      </div>
+    </form>
+  </section>
+</div>
+{% endblock %}
