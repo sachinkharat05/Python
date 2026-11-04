@@ -9,7 +9,6 @@ from app import app, users
 def base_url():
 
     users.clear()
-
     server = make_server("127.0.0.1", 0, app)
 
     thread = threading.Thread(
