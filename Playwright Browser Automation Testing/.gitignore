@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.venv/
+venv/
+.env
+
+# Playwright
+playwright-report/
+test-results/
+
+# Editors
+.vscode/
+.idea/
+.DS_Store
